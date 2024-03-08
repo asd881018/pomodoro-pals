@@ -1,5 +1,29 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Prerequisites
+
+Before you begin, ensure you have met the following requirements:
+
+* You have installed Node.js version 18.17.0 or later. If you haven't, you can use Node Version Manager (nvm) to install it. If you don't have nvm installed, you can install it with the following command:
+
+    ```bash
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+    ```
+
+    After installing nvm, close your terminal and open a new one. Verify that nvm is installed by running nvm --version. Then, install and use the required Node.js version by running:
+
+    ```bash
+    nvm install 18.17.0
+    nvm use 18.17.0
+    ```
+
+* You have installed the necessary dependencies for the project. If not, you can install them with the following command:
+
+    ```bash
+    npm install --save next react react-dom
+    ```
+
+
 ## Getting Started
 
 First, run the development server:
