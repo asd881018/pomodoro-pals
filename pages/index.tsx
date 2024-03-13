@@ -61,3 +61,25 @@ export default function Home() {
     </div>
   );
 }
+
+// function updatePomodoroCount(pomodoroCount: number) {
+//   const apiUrl = 'https://ifu9nh73j6.execute-api.us-west-2.amazonaws.com/UpdatePomodoroCount';
+
+//   // Data to be sent to the API
+//   const postData = {
+//     userId: "exampleUserId",
+//     pomodoroCount: pomodoroCount
+//   };
+
+//   // Making a POST request using fetch
+//   fetch(apiUrl, {
+//     method: 'POST', // Method is 'ANY' as per your route, but typically you'll use POST for updates
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(postData), // Convert data into JSON string
+//   })
+//   .then(response => response.json()) // Parsing the JSON response
+//   .then(data => console.log('Success:', data))
+//   .catch((error) => console.error('Error:', error));
+// }

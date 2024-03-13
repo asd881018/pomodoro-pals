@@ -42,9 +42,37 @@ export function TimerProvider({ children }: { children: JSX.Element }) {
     handleStopClick();
   };
 
+  // const updatePomodoroCount = () => {
+  //   if (timeOption === 'pomodoro') {
+  //     setPomodoroCount(prevCount => prevCount + 1);
+  //   }
+  // };
+
   const updatePomodoroCount = () => {
     if (timeOption === 'pomodoro') {
-      setPomodoroCount(prevCount => prevCount + 1);
+      setPomodoroCount(prevCount => {
+        const newCount = prevCount + 1;
+
+        // Data to be sent to the API
+        const postData = {
+          userId: "FrontEndExampleUserId",
+          pomodoroCount: newCount
+        };
+
+        // Making a POST request using fetch
+        fetch('https://ifu9nh73j6.execute-api.us-west-2.amazonaws.com/UpdatePomodoroCount', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(postData),
+        })
+        .then(response => response.json())
+        .then(data => console.log('Success:', data))
+        .catch((error) => console.error('Error:', error));
+
+        return newCount;
+      });
     }
   };
 
@@ -71,3 +99,4 @@ export function TimerProvider({ children }: { children: JSX.Element }) {
     <TimerContext.Provider value={value}>{children}</TimerContext.Provider>
   );
 }
+
