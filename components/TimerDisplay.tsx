@@ -49,7 +49,7 @@ export default function TimerDisplay({
         <motion.button
           type='button'
           variants={buttonVariants}
-          className='ml-4 text-xs md:text-h3 uppercase text-tertiary transition-colors duration-300 hover:text-secondary focus:outline-dashed focus:outline-tertiary'
+          className='md:ml-4 text-xs md:text-h3 uppercase text-tertiary transition-colors duration-300 hover:text-secondary focus:outline-dashed focus:outline-tertiary'
           onClick={handlePauseClick}
           onKeyDown={(e) => e.key === 'Enter' && playActiveSfx()}
           onKeyUp={(e) =>
@@ -72,7 +72,7 @@ export default function TimerDisplay({
         <motion.button
           variants={buttonVariants}
           type='button'
-          className='ml-4 text-xs md:text-h3 uppercase text-red transition-colors duration-300 hover:text-secondary focus:outline-dashed focus:outline-tertiary'
+          className='md:ml-4 text-xs md:text-h3 uppercase text-red transition-colors duration-300 hover:text-secondary focus:outline-dashed focus:outline-tertiary'
           onClick={() => {
             handleOnComplete();
             resetSfx();
