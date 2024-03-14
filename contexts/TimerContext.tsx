@@ -60,7 +60,7 @@ export function TimerProvider({ children }: { children: JSX.Element }) {
         };
 
         // Making a POST request using fetch
-        fetch('https://ifu9nh73j6.execute-api.us-west-2.amazonaws.com/UpdatePomodoroCount', {
+        fetch('https://zzytuicsrb.execute-api.us-west-1.amazonaws.com/dev/updatePomodoroCount', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
