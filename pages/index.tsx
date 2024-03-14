@@ -19,8 +19,7 @@ import img from "../public/assets/static_image.png";
 import { Amplify } from "aws-amplify";
 import { withAuthenticator } from '@aws-amplify/ui-react'
 import awsconfig from "../src/aws-exports";
-// import config from "../src/aws-exports";
-import config from './aws-exports';
+import config from "../src/aws-exports";
 import Link from "next/link";
 import Profile from "./profile";
 Amplify.configure({ ...awsconfig });
