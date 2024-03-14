@@ -20,7 +20,7 @@ export default function TimeInputs() {
 
     setTimerDuration((prevState: TimeOptionTypes) => ({
       ...prevState,
-      [name]: result,
+      [name]: result / 60,
     }));
 
     playSwitchOnSfx();
