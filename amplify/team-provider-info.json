@@ -16,5 +16,23 @@
         "pomodoropalsc510e293": {}
       }
     }
+  },
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-pomodoropals-staging-231809-authRole",
+      "UnauthRoleArn": "arn:aws:iam::058264241945:role/amplify-pomodoropals-staging-231809-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::058264241945:role/amplify-pomodoropals-staging-231809-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-pomodoropals-staging-231809-deployment",
+      "UnauthRoleName": "amplify-pomodoropals-staging-231809-unauthRole",
+      "StackName": "amplify-pomodoropals-staging-231809",
+      "StackId": "arn:aws:cloudformation:us-west-2:058264241945:stack/amplify-pomodoropals-staging-231809/a2644df0-e1ca-11ee-9b62-0299066c4e79",
+      "AmplifyAppId": "d1af6445tqgxqj"
+    },
+    "categories": {
+      "auth": {
+        "pomodoropalsc510e293": {}
+      }
+    }
   }
 }
