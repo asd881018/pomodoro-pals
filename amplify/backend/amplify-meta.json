@@ -1,0 +1,57 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-pomodoropals-dev-181733-authRole",
+      "UnauthRoleArn": "arn:aws:iam::590183983617:role/amplify-pomodoropals-dev-181733-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::590183983617:role/amplify-pomodoropals-dev-181733-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-pomodoropals-dev-181733-deployment",
+      "UnauthRoleName": "amplify-pomodoropals-dev-181733-unauthRole",
+      "StackName": "amplify-pomodoropals-dev-181733",
+      "StackId": "arn:aws:cloudformation:us-east-1:590183983617:stack/amplify-pomodoropals-dev-181733/7a88cc00-e0d7-11ee-a40e-0ec312a8477d",
+      "AmplifyAppId": "d2eexwpkgxh09v"
+    }
+  },
+  "auth": {
+    "pomodoropalsc510e293": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
+      "output": {
+        "UserPoolId": "us-east-1_4ei15lc8b",
+        "AppClientIDWeb": "q6ss05mkc1mi2h1nsqpkmie41",
+        "AppClientID": "e0t28p3fs1kris6cmtc2h1835",
+        "IdentityPoolId": "us-east-1:49a38634-2836-4804-b679-62eb83632c1b",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-1:590183983617:userpool/us-east-1_4ei15lc8b",
+        "IdentityPoolName": "pomodoropalsc510e293_identitypool_c510e293__dev",
+        "UserPoolName": "pomodoropalsc510e293_userpool_c510e293"
+      },
+      "lastPushTimeStamp": "2024-03-14T02:47:59.331Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-pomodoropals-dev-181733-deployment/amplify-cfn-templates/auth/pomodoropalsc510e293-cloudformation-template.json",
+        "logicalId": "authpomodoropalsc510e293"
+      }
+    }
+  }
+}
