@@ -4,23 +4,22 @@ import { motion, Variants } from 'framer-motion';
 import { StyleContext } from '../contexts/StyleContext';
 
 type AnalyticsToggleProps = {
-	onChartTypeChange: (type: 'week' | 'month' | 'year') => void;
+  onChartTypeChange: (type: 'week' | 'month' | 'year') => void;
 };
 
 const AnalyticsToggle = ({ onChartTypeChange }: AnalyticsToggleProps) => {
-  const [timeOption, setTimeOption] = useState('daily');
+  const [timeOption, setTimeOption] = useState('week');
   const { color } = useContext(StyleContext);
 
   const activeColor: string =
-	  color === 'red' ? 'bg-red' : color === 'cyan' ? 'bg-cyan' : 'bg-violet';
-  
-	const timeOptions = [
-	{ id: 1, name: 'Week', value: 'week' },
-	{ id: 2, name: 'Month', value: 'month' },
-	{ id: 3, name: 'Year', value: 'year' },
-	];
-	  
-  
+    color === 'red' ? 'bg-red' : color === 'cyan' ? 'bg-cyan' : 'bg-violet';
+
+  const timeOptions = [
+    { id: 1, name: 'Week', value: 'week' },
+    { id: 2, name: 'Month', value: 'month' },
+    { id: 3, name: 'Year', value: 'year' },
+  ];
+
   const groupVariants: Variants = {
     initial: { opacity: 0, y: -10 },
     animate: {
@@ -63,7 +62,7 @@ const AnalyticsToggle = ({ onChartTypeChange }: AnalyticsToggleProps) => {
                 type='button'
                 layout
                 variants={buttonVariants}
-                onClick={() => onChartTypeChange(value as 'week' | 'month' | 'year')} // Ensure correct type
+                onClick={() => onChartTypeChange(value as 'week' | 'month' | 'year')}
                 className={`flex w-full items-center justify-center rounded-full py-1.5 md:py-4 text-center transition-all duration-100 ease-in hover:text-secondary focus:rounded-full focus:outline-dashed focus:outline-tertiary md:text-base ${checked ? `${activeColor} text-primary-dark` : `text-tertiary`
                   }`}
               >

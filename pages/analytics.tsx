@@ -11,51 +11,29 @@ const Analytics = () => {
 	const [chartType, setChartType] = useState<'week' | 'month' | 'year'>('week');
 	const { color } = useContext(StyleContext);
 
-	color === 'red' ? 'bg-red' : color === 'cyan' ? 'bg-cyan' : 'bg-violet';
-
-	const convertTailwindColorToRGB = (color: string): string => {
-		switch (color) {
-			case 'bg-red':
-				return 'rgb(248 112 112)'; // Red color in RGB format
-			case 'bg-cyan':
-				return 'rgb(112 243 248)'; // Cyan color in RGB format
-			case 'bg-violet':
-				return 'rgb(216 129 248)'; // Violet color in RGB format
-			default:
-				return 'rgb(248 112 112)';
-		}
-	};
+	const activeColor: string =
+		color === 'red' ? 'rgb(248 112 112)' : color === 'cyan' ? 'rgb(112 243 248)' : 'rgb(216 129 248)';
 
 	useEffect(() => {
-		// Here you can fetch your Pomodoro timer data from an API or local storage if needed
-		// For now, we're just using the pomodoroCount state as an example
-		const countData = [
-			{ label: 'Pomodoro Sessions', count: pomodoroCount },
-			// You can add more data points if needed
-		];
-		setData(countData);
-	}, [pomodoroCount]);
-
-	// useEffect(() => {
-	// 	const fetchData = async () => {
-	// 		let newData: { label: string; count: number; }[] = [];
-	// 		switch (chartType) {
-	// 			case 'week':
-	// 				newData = getWeeklyData();
-	// 				break;
-	// 			case 'month':
-	// 				newData = getMonthlyData();
-	// 				break;
-	// 			case 'year':
-	// 				newData = getYearlyData();
-	// 				break;
-	// 			default:
-	// 				break;
-	// 		}
-	// 		setData(newData);
-	// 	};
-	// 	fetchData();
-	// }, [chartType, pomodoroCount]);
+		const fetchData = async () => {
+			let newData: { label: string; count: number; }[] = [];
+			switch (chartType) {
+				case 'week':
+					newData = getWeeklyData();
+					break;
+				case 'month':
+					newData = getMonthlyData();
+					break;
+				case 'year':
+					newData = getYearlyData();
+					break;
+				default:
+					break;
+			}
+			setData(newData);
+		};
+		fetchData();
+	}, [chartType, pomodoroCount]);
 
 	useEffect(() => {
 		drawChart();
@@ -76,7 +54,7 @@ const Analytics = () => {
 					datasets: [{
 						label: 'Pomodoro Sessions',
 						data: data.map(item => item.count),
-						backgroundColor: convertTailwindColorToRGB(color),
+						backgroundColor: activeColor,
 						borderColor: 'rgba(255, 255, 255, 0.2)',
 						borderWidth: 1
 					}]
@@ -106,9 +84,12 @@ const Analytics = () => {
 		}
 	};
 
+	// NEED TO GET HISTORY FROM DATAABASE FOR getWeeklyData, getMonthlyData & getYearlyData
 	const getWeeklyData = () => {
 		const labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-		const counts = [5, 3, 7, 2, 6, 4, 8]; // Sample data, replace this with your actual data
+		
+		const counts = Array.from({ length: 7 }, () => Math.floor(Math.random() * 10));
+		
 		return labels.map((label, index) => ({ label, count: counts[index] }));
 	};
 
@@ -118,12 +99,15 @@ const Analytics = () => {
 		const labels = Array.from({ length: daysInMonth }, (_, index) => `${index + 1}`);
 
 		const counts = Array.from({ length: daysInMonth }, () => Math.floor(Math.random() * 10));
+		
 		return labels.map((label, index) => ({ label, count: counts[index] }));
 	};
 
 	const getYearlyData = () => {
 		const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-		const counts = [100, 120, 90, 110, 130, 140, 150, 100, 95, 105, 115, 110]; // Sample data, replace this with your actual data
+		
+		const counts = Array.from({ length: 12 }, () => Math.floor(Math.random() * 10));
+		
 		return labels.map((label, index) => ({ label, count: counts[index] }));
 	};
 
