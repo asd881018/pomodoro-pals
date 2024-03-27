@@ -16,11 +16,15 @@ export default function TimeInputs() {
   const handleTimerDurationChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    const result: number = +value.replace(/\D/g, '');
+    // const result: number = +value.replace(/\D/g, '');
+    
+    // can have decimal
+    // for easy testing enter 0.02 mins ==> 1 seecond
+    const result: number = parseFloat(value);
 
     setTimerDuration((prevState: TimeOptionTypes) => ({
       ...prevState,
-      [name]: result / 60,
+      [name]: result,
     }));
 
     playSwitchOnSfx();
