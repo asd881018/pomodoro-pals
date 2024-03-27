@@ -1,7 +1,7 @@
-// TopBar.tsx
+// Header.tsx
 import Link from 'next/link';
 
-const TopBar = () => {
+const Header = () => {
   return (
     <div className="fixed top-0 left-0 w-full bg-black bg-opacity-20 z-50">
       <div className="flex justify-between items-center p-4">
@@ -21,4 +21,4 @@ const TopBar = () => {
   );
 };
 
-export default TopBar;
+export default Header;

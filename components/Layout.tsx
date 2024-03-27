@@ -1,7 +1,8 @@
 // Layout.tsx
 
 import React, { ReactNode } from 'react';
-import TopBarMenu from './TopBarMenu';
+import Header from './Header';
+import Footer from './Footer';
 
 interface LayoutProps {
   children: ReactNode;
@@ -10,8 +11,9 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div>
-      <TopBarMenu />
+      <Header />
       {children}
+      <Footer />
     </div>
   );
 };
