@@ -13,9 +13,11 @@ export default function FontsList() {
   const { playBiteSfx } = useContext(SoundsContext);
 
   const fontOptions: StyleItemTypes[] = [
-    { id: 1, value: 'font-kumbh-sans' },
+    { id: 1, value: 'font-sans' },
     { id: 2, value: 'font-roboto-slab' },
     { id: 3, value: 'font-space-mono' },
+    { id: 4, value: 'font-kumbh-sans' },
+    { id: 5, value: 'font-serif' },
   ];
 
   return (

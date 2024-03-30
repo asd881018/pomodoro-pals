@@ -4,6 +4,7 @@ import Layout from '../components/Layout';
 import { TimerContext } from '../contexts/TimerContext';
 import AnalyticsToggle from '../components/AnalyticsToggle';
 import { StyleContext } from '../contexts/StyleContext';
+import Link from 'next/link';
 
 const Analytics = () => {
 	const { pomodoroCount } = useContext(TimerContext);
@@ -12,7 +13,10 @@ const Analytics = () => {
 	const { color } = useContext(StyleContext);
 
 	const activeColor: string =
-		color === 'red' ? 'rgb(248 112 112)' : color === 'cyan' ? 'rgb(112 243 248)' : 'rgb(216 129 248)';
+		color === 'red' ? '#F87070' : color === 'cyan' ? '#00D1D1' : '#D881F8';
+
+	const activeColorBG: string =
+		color === 'red' ? 'bg-red' : color === 'cyan' ? 'bg-cyan' : 'bg-violet';
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -37,7 +41,11 @@ const Analytics = () => {
 
 	useEffect(() => {
 		drawChart();
-	}, [data]);
+	},);
+
+	// useEffect(() => {
+	// 	drawChart();
+	// }, [data]);
 
 	const drawChart = () => {
 		const ctx = document.getElementById('pomodoroChart') as HTMLCanvasElement | null;
@@ -87,9 +95,9 @@ const Analytics = () => {
 	// NEED TO GET HISTORY FROM DATAABASE FOR getWeeklyData, getMonthlyData & getYearlyData
 	const getWeeklyData = () => {
 		const labels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-		
+
 		const counts = Array.from({ length: 7 }, () => Math.floor(Math.random() * 10));
-		
+
 		return labels.map((label, index) => ({ label, count: counts[index] }));
 	};
 
@@ -99,15 +107,15 @@ const Analytics = () => {
 		const labels = Array.from({ length: daysInMonth }, (_, index) => `${index + 1}`);
 
 		const counts = Array.from({ length: daysInMonth }, () => Math.floor(Math.random() * 10));
-		
+
 		return labels.map((label, index) => ({ label, count: counts[index] }));
 	};
 
 	const getYearlyData = () => {
 		const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-		
+
 		const counts = Array.from({ length: 12 }, () => Math.floor(Math.random() * 10));
-		
+
 		return labels.map((label, index) => ({ label, count: counts[index] }));
 	};
 
@@ -116,13 +124,38 @@ const Analytics = () => {
 	};
 
 	return (
-		<Layout>
-			<div className='bg-primary w-screen h-screen'>
-				<div className='pt-20 w-full flex flex-col items-center justify-center'>
+		<Layout page={'analytics'}>
+			<div className='w-full h-full md:pb-14 pt-20 px-4 md:px-0'>
+				<div className='w-full flex flex-col items-center justify-center'>
 					<AnalyticsToggle onChartTypeChange={handleChartTypeChange} />
 				</div>
-				<canvas className='p-16' id="pomodoroChart" width="800" height="400"></canvas>
-				<div className="text-white text-xl flex items-center justify-center">Pomodoro Timer Report</div>
+				<canvas className='p-4 md:p-16 max-w-full' id="pomodoroChart" width="800" height="400"></canvas>
+
+				<div className='flex flex-col'>
+					<h1 className="text-white text-xl text-center pb-4">Latest Report Summary</h1>
+					<div className='w-full flex flex-col items-left justify-center md:px-2 md:w-11/12 m-auto'>
+						<h3 className="text-white text-md pb-2">Date of Report</h3>
+						<p className="text-white text-sm">Comments:
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+							sed do eiusmod tempor incididunt ut labore et dolore magna
+							aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+							ullamco laboris nisi ut aliquip ex ea commodo consequat.
+							Duis aute irure dolor in reprehenderit in voluptate velit
+							esse cillum dolore eu fugiat nulla pariatur. Excepteur
+							sint occaecat cupidatat non proident, sunt in culpa qui
+							officia deserunt mollit anim id est laborum.
+						</p>
+					</div>
+					<Link href="/summary" className='self-center'>
+						<button
+							type="submit"
+							className={`self-center w-40 mt-8 rounded-full ${activeColorBG} p-[0.5rem] px-8 text-secondary text-sm transition-all duration-300 hover:scale-90 focus:rounded-full focus:outline-dashed focus:outline-primary`}
+							onClick={() => null}
+						>
+							View All
+						</button>
+					</Link>
+				</div>
 			</div>
 		</Layout>
 	);

@@ -20,6 +20,8 @@ export default function FontsList() {
     { id: 1, value: 'red' },
     { id: 2, value: 'cyan' },
     { id: 3, value: 'violet' },
+    { id: 4, value: 'green' },
+    { id: 5, value: 'yellow' },
   ];
 
   return (

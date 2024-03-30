@@ -1,19 +1,23 @@
 // Layout.tsx
 
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useContext } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 
+import { StyleContext } from '../contexts/StyleContext';
+
 interface LayoutProps {
   children: ReactNode;
+  page: string;
 }
 
-const Layout: React.FC<LayoutProps> = ({ children }) => {
+const Layout = ({ children, page } : LayoutProps) => {
+  const { font } = useContext(StyleContext);
   return (
-    <div>
+    <div className={`bg-primary min-h-screen h-full min-w-screen flex flex-col justify-between ${font}`}>
       <Header />
       {children}
-      <Footer />
+      <Footer page={page}/>
     </div>
   );
 };

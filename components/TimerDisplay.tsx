@@ -4,6 +4,7 @@ import { motion, Variants, AnimatePresence } from 'framer-motion';
 // Context
 import { TimerContext } from '../contexts/TimerContext';
 import { SoundsContext } from '../contexts/SoundsContext';
+import { StyleContext } from '../contexts/StyleContext';
 
 // Utils
 import { convertSecondsToMinutes } from '../utils/helpers';
@@ -17,6 +18,11 @@ export default function TimerDisplay({
     useContext(TimerContext);
   const { playActiveSfx, playPopOnSfc, playPopOffSfx, resetSfx } =
     useContext(SoundsContext);
+
+  const { color } = useContext(StyleContext);
+
+  const activeColor: string =
+    color === 'red' ? 'text-red' : color === 'cyan' ? 'text-cyan' : 'text-violet';
 
   const groupVariants: Variants = {
     initial: { opacity: 0, y: -10 },
@@ -62,7 +68,7 @@ export default function TimerDisplay({
         </motion.button>
         <motion.span
           variants={buttonVariants}
-          className='my-4 text-[3rem] md:text-[5rem] text-tertiary'
+          className='my-4 text-[3rem] md:text-[3.5rem] text-tertiary'
           role='timer'
           aria-live='assertive'
         >
@@ -72,7 +78,7 @@ export default function TimerDisplay({
         <motion.button
           variants={buttonVariants}
           type='button'
-          className='md:ml-4 text-xs md:text-h3 uppercase text-red transition-colors duration-300 hover:text-secondary focus:outline-dashed focus:outline-tertiary'
+          className={`md:ml-4 text-xs md:text-h3 uppercase ${activeColor} transition-colors duration-300 hover:text-secondary focus:outline-dashed focus:outline-tertiary`}
           onClick={() => {
             handleOnComplete();
             resetSfx();

@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { CountdownCircleTimer } from 'react-countdown-circle-timer';
 import { motion, Variants } from 'framer-motion';
 
@@ -6,6 +6,7 @@ import { motion, Variants } from 'framer-motion';
 import { StyleContext } from '../contexts/StyleContext';
 import { TimerContext } from '../contexts/TimerContext';
 import { SoundsContext } from '../contexts/SoundsContext';
+import Modal from '../components/SummaryModal';
 
 // Components
 import TimerDisplay from './TimerDisplay';
@@ -18,10 +19,11 @@ export default function Timer() {
   const { finishedSfx } = useContext(SoundsContext);
   const { isPlaying, resetKey, handleOnComplete, timerDuration, timeOption, updatePomodoroCount } =
     useContext(TimerContext);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const activeColor: string =
     // eslint-disable-next-line no-nested-ternary
-    color === 'red' ? 'F87070' : color === 'cyan' ? '70F3F8' : 'D881F8';
+    color === 'red' ? 'F87070' : color === 'cyan' ? '00D1D1' : 'D881F8';
 
   const convertedDuration = convertMinutesToSeconds(+timerDuration[timeOption]);
 
@@ -35,6 +37,10 @@ export default function Timer() {
         duration: 0.3,
       },
     },
+  };
+
+  const toggleModal = () => {
+    setIsModalOpen(!isModalOpen);
   };
 
   return (
@@ -58,6 +64,7 @@ export default function Timer() {
             handleOnComplete();
             updatePomodoroCount();
             finishedSfx();
+            toggleModal();
           }}
         >
           {({ remainingTime }) => (
@@ -87,6 +94,8 @@ export default function Timer() {
           )}
         </CountdownCircleTimer>
       </div>
+
+      {isModalOpen && <Modal onClose={toggleModal} />}
     </motion.div>
   );
 }
