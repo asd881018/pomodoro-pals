@@ -13,7 +13,17 @@
     },
     "categories": {
       "auth": {
-        "pomodoropalsc510e293": {}
+        "pomodoropalsc510e293": {},
+        "userPoolGroups": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d2eexwpkgxh09v",
+          "type": "cicd"
+        }
+      },
+      "storage": {
+        "s3pomodoropalsstorage02e7d6f8": {}
       }
     }
   },

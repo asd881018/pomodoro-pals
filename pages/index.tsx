@@ -17,16 +17,17 @@ import Footer from "../components/Footer";
 import img from "../public/assets/static_image.png";
 
 import { Amplify } from "aws-amplify";
-import { withAuthenticator } from '@aws-amplify/ui-react'
+import { Button, useAuthenticator, withAuthenticator } from '@aws-amplify/ui-react'
 import awsconfig from "../src/aws-exports";
 import config from "../src/aws-exports";
 import Link from "next/link";
 import Profile from "./profile";
 Amplify.configure({ ...awsconfig });
 
-function Home() {
+export default function Home() {
   const { font } = useContext(StyleContext);
   const { pomodoroCount } = useContext(TimerContext);
+  const { user, signOut } = useAuthenticator((context) => [context.user])
 
   const imageVariants: Variants = {
     initial: { opacity: 0, y: -10 },
@@ -72,7 +73,7 @@ function Home() {
           </div>
           <Settings />
           <Profile/>
-
+          <Button onClick={signOut} variation="primary">Sign Out</Button>
 
           
         </div>
@@ -88,4 +89,24 @@ function Home() {
   );
 }
 
-export default withAuthenticator(Home)
+// function updatePomodoroCount(pomodoroCount: number) {
+//   const apiUrl = 'https://ifu9nh73j6.execute-api.us-west-2.amazonaws.com/UpdatePomodoroCount';
+
+//   // Data to be sent to the API
+//   const postData = {
+//     userId: "exampleUserId",
+//     pomodoroCount: pomodoroCount
+//   };
+
+//   // Making a POST request using fetch
+//   fetch(apiUrl, {
+//     method: 'POST', // Method is 'ANY' as per your route, but typically you'll use POST for updates
+//     headers: {
+//       'Content-Type': 'application/json',
+//     },
+//     body: JSON.stringify(postData), // Convert data into JSON string
+//   })
+//   .then(response => response.json()) // Parsing the JSON response
+//   .then(data => console.log('Success:', data))
+//   .catch((error) => console.error('Error:', error));
+// }
