@@ -1,6 +1,6 @@
 import { useState, createContext, useMemo } from 'react';
 import {getCurrentUser} from '@aws-amplify/auth'
-
+import { CLOUDFRONT_URL } from '../utils/config';
 // Types
 import { TimerDuration, TimerContextTypes } from '../types/index';
 
@@ -97,7 +97,7 @@ export function TimerProvider({ children }: { children: JSX.Element }) {
             console.log(postData)
 
           // Making a POST request using fetch
-          fetch('https://pa54p2pdh7.execute-api.us-east-1.amazonaws.com/dev', {
+          fetch(CLOUDFRONT_URL, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

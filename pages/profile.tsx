@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-
+import { CLOUDFRONT_URL } from '../utils/config';
 import { Authenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 
@@ -22,7 +22,7 @@ function Profile() {
         body: raw
       }
 
-      fetch("https://pa54p2pdh7.execute-api.us-east-1.amazonaws.com/dev", requestOptions)
+      fetch(CLOUDFRONT_URL, requestOptions)
       .then(response => response.text())
       .then(result => alert(JSON.parse(result).body))
       .catch(error => console.log("error", error))
