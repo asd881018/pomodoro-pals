@@ -24,6 +24,11 @@
       },
       "storage": {
         "s3pomodoropalsstorage02e7d6f8": {}
+      },
+      "function": {
+        "lambdafunctionMar29": {},
+        "lambdafunctionmar29": {},
+        "pomodoropalsa900eaef": {}
       }
     }
   }
