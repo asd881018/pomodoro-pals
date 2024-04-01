@@ -1,38 +1,23 @@
-import { useContext, useEffect } from 'react';
+import { useState, useContext } from 'react';
 import { RadioGroup } from '@headlessui/react';
 import { motion, Variants } from 'framer-motion';
-
-// Context
 import { StyleContext } from '../contexts/StyleContext';
-import { TimerContext } from '../contexts/TimerContext';
-import { SoundsContext } from '../contexts/SoundsContext';
 
-// Types
-import { TimeOptionTypes } from '../types/index';
+type AnalyticsToggleProps = {
+  onChartTypeChange: (type: 'week' | 'month' | 'year') => void;
+};
 
-export default function TimerToggler() {
+const AnalyticsToggle = ({ onChartTypeChange }: AnalyticsToggleProps) => {
+  const [timeOption, setTimeOption] = useState('week');
   const { color } = useContext(StyleContext);
-  const {
-    timeOption,
-    setTimeOption,
-    handleStopClick,
-    handleResetClick,
-    timerDuration,
-  } = useContext(TimerContext);
-  const { playToggleSfx } = useContext(SoundsContext);
 
   const activeColor: string = 'bg-' + color;
 
-  const timeOptions: TimeOptionTypes[] = [
-    { id: 1, name: 'pomodoro', value: 'pomodoro' },
-    { id: 2, name: 'short break', value: 'shortBreak' },
-    { id: 3, name: 'long break', value: 'longBreak' },
+  const timeOptions = [
+    { id: 1, name: 'Week', value: 'week' },
+    { id: 2, name: 'Month', value: 'month' },
+    { id: 3, name: 'Year', value: 'year' },
   ];
-
-  useEffect(() => {
-    handleResetClick();
-    handleStopClick();
-  }, [timerDuration, timeOption]);
 
   const groupVariants: Variants = {
     initial: { opacity: 0, y: -10 },
@@ -76,7 +61,7 @@ export default function TimerToggler() {
                 type='button'
                 layout
                 variants={buttonVariants}
-                onClick={() => playToggleSfx()}
+                onClick={() => onChartTypeChange(value as 'week' | 'month' | 'year')}
                 className={`flex w-full items-center justify-center rounded-full py-1.5 md:py-4 text-center transition-all duration-100 ease-in hover:text-secondary focus:rounded-full focus:outline-dashed focus:outline-tertiary md:text-base ${checked ? `${activeColor} text-primary-dark` : `text-tertiary`
                   }`}
               >
@@ -89,3 +74,5 @@ export default function TimerToggler() {
     </motion.div>
   );
 }
+
+export default AnalyticsToggle;

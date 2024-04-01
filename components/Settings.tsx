@@ -20,6 +20,10 @@ import muteIcon from '../public/assets/icon-mute.svg';
 
 export default function Settings() {
   const { font } = useContext(StyleContext);
+  const { color } = useContext(StyleContext);
+
+  const activeColor: string = 'bg-' + color;
+
   const {
     volume,
     setVolume,
@@ -134,7 +138,7 @@ export default function Settings() {
             <button
               type='button'
               onClick={handleClose}
-              className='absolute -bottom-6 left-1/2 -translate-x-1/2 rounded-full bg-red p-4 px-12 text-secondary transition-all duration-300 hover:scale-90 focus:rounded-full focus:outline-dashed focus:outline-primary'
+              className={`absolute -bottom-6 left-1/2 -translate-x-1/2 rounded-full ${activeColor} p-4 px-12 text-secondary transition-all duration-300 hover:scale-90 focus:rounded-full focus:outline-dashed focus:outline-primary`}
             >
               Apply
             </button>

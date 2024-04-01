@@ -16,7 +16,8 @@ export default function TimeInputs() {
   const handleTimerDurationChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
-    const result: number = +value.replace(/\D/g, '');
+    // const result: number = +value.replace(/\D/g, '');
+    const result: number = parseFloat(value);
 
     setTimerDuration((prevState: TimeOptionTypes) => ({
       ...prevState,

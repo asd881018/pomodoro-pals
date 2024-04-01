@@ -11,10 +11,10 @@ import { TimerContext } from "../contexts/TimerContext";
 import TimerToggler from "../components/TimerToggler";
 import Timer from "../components/Timer";
 import Settings from "../components/Settings";
-import Footer from "../components/Footer";
 
 // Assets
-import img from "../public/assets/static_image.png";
+import img from '../public/assets/static_image.png';
+import Layout from '../components/Layout';
 
 import { Amplify } from "aws-amplify";
 import { Button, useAuthenticator, withAuthenticator } from '@aws-amplify/ui-react'
@@ -53,38 +53,30 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-
-      <main className="flex h-[100vh] w-[100vw] flex-col items-center md:flex-row md:justify-between">
-        <div className="h-3/5 w-full md:block md:h-full md:w-3/5">
-          <motion.div
-            initial="initial"
-            animate="animate"
-            variants={imageVariants}
-            style={{ height: "100%" }}
-          >
-            <Image src={img} alt="pomodoro" className="h-full object-cover" />
-          </motion.div>
-        </div>
-        <div className="flex h-2/5 w-full flex-col items-center justify-center md:h-full md:w-2/5">
-          <TimerToggler />
-          <Timer />
-          <div className="flex items-center justify-center text-xl text-white">
-            History: {pomodoroCount}
+      <Layout page={'index'}>
+        <main className='w-[100vw] h-[100vh] pb-8 md:pb-0 flex flex-col items-center md:flex-row md:justify-between'>
+          <div className='md:block w-full md:w-3/5 h-3/5 md:h-full'>
+            <motion.div initial='initial' animate='animate' variants={imageVariants} style={{ height: '100%' }}>
+              <Image src={img} alt='pomodoro' className='h-full object-cover' />
+            </motion.div>
           </div>
-          <Settings />
-          <Profile/>
-          <Button onClick={signOut} variation="primary">Sign Out</Button>
-
-          
-        </div>
-      </main>
-
-      {/* <Link href="/profile">
+          <div className='w-full md:w-2/5 h-2/5 md:h-full flex flex-col items-center justify-center'>
+            <TimerToggler />
+            <Timer />
+            <div className="text-white text-xl flex items-center justify-center">History: {pomodoroCount}</div>
+            <Settings />
+            
+            <Profile/>
+            <Button onClick={signOut} variation="primary">Sign Out</Button>
+          </div>
+        </main>
+        
+        {/* <Link href="/profile">
             <a className="flex items-center justify-center text-xl text-white">
               Profile
             </a>
           </Link> */}
-      <Footer />
+      </Layout>
     </div>
   );
 }

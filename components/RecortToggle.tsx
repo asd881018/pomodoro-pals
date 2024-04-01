@@ -1,38 +1,30 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { RadioGroup } from '@headlessui/react';
 import { motion, Variants } from 'framer-motion';
+import RecordList from './RecordList';
 
 // Context
 import { StyleContext } from '../contexts/StyleContext';
-import { TimerContext } from '../contexts/TimerContext';
 import { SoundsContext } from '../contexts/SoundsContext';
 
-// Types
-import { TimeOptionTypes } from '../types/index';
+interface RecordToggleProps {
+	goals: string[];
+  completedGoals: string[];
+  markAsComplete: (id: number) => void;
+}
 
-export default function TimerToggler() {
+
+export default function RecordToggler({ goals, completedGoals, markAsComplete } : RecordToggleProps) {
+  const [recordOption, setRecordOption] = useState('completed');
   const { color } = useContext(StyleContext);
-  const {
-    timeOption,
-    setTimeOption,
-    handleStopClick,
-    handleResetClick,
-    timerDuration,
-  } = useContext(TimerContext);
   const { playToggleSfx } = useContext(SoundsContext);
 
   const activeColor: string = 'bg-' + color;
 
-  const timeOptions: TimeOptionTypes[] = [
-    { id: 1, name: 'pomodoro', value: 'pomodoro' },
-    { id: 2, name: 'short break', value: 'shortBreak' },
-    { id: 3, name: 'long break', value: 'longBreak' },
+  const recordOptions = [
+    { id: 1, name: 'Completed Goals', value: 'completed' },
+    { id: 2, name: 'Current Goals', value: 'current' },
   ];
-
-  useEffect(() => {
-    handleResetClick();
-    handleStopClick();
-  }, [timerDuration, timeOption]);
 
   const groupVariants: Variants = {
     initial: { opacity: 0, y: -10 },
@@ -58,14 +50,14 @@ export default function TimerToggler() {
       initial='initial'
       animate='animate'
       variants={groupVariants}
-      className='w-11/12'
+      className='w-11/12 self-center'
     >
       <RadioGroup
-        value={timeOption}
-        onChange={setTimeOption}
-        className='grid  grid-cols-3 items-center justify-between gap-4 rounded-full bg-primary-dark md:p-2 text-body-2 tracking-wide'
+        value={recordOption}
+        onChange={setRecordOption}
+        className='grid  grid-cols-2 items-center justify-between gap-4 rounded-full bg-primary-dark md:p-2 text-body-2 tracking-wide'
       >
-        {timeOptions.map(({ id, name, value }) => (
+        {recordOptions.map(({ id, name, value }) => (
           <RadioGroup.Option
             value={value}
             key={id}
@@ -86,6 +78,25 @@ export default function TimerToggler() {
           </RadioGroup.Option>
         ))}
       </RadioGroup>
+      <div className='my-8 h-[40vh] overflow-y-auto self-center text-center'>
+        {recordOption === 'completed' ? (
+          completedGoals.length > 0 ? (
+            <RecordList goals={completedGoals} />
+          ) : (
+            <p>No goals have been completed yet.</p>
+          )
+        ) : (
+          <div className='self-center text-center'>
+            {goals.length > 0 ? (
+              <>
+                <RecordList goals={goals} onMarkAsComplete={markAsComplete} />
+              </>
+            ) : (
+              <p>No goals have been set yet.</p>
+            )}
+          </div>
+        )}
+      </div>
     </motion.div>
   );
 }

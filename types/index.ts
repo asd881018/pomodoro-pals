@@ -1,6 +1,8 @@
 export interface StyleItemTypes {
   id: number;
   value: string;
+  bgVal?: string;
+  textVal?: string;
 }
 
 export interface TimeOptionTypes {
