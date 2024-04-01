@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "paths": {
+    "/cycles/{customerId}": {
+      "name": "/cycles/{customerId}",
+      "lambdaFunction": "pomodoropalsa900eaef",
+      "permissions": {
+        "setting": "open"
+      }
+    }
+  }
+}

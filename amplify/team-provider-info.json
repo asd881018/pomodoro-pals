@@ -1,15 +1,30 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-pomodoropals-dev-599d4-authRole",
-      "UnauthRoleArn": "arn:aws:iam::851725559942:role/amplify-pomodoropals-dev-599d4-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::851725559942:role/amplify-pomodoropals-dev-599d4-authRole",
-      "Region": "us-west-1",
-      "DeploymentBucketName": "amplify-pomodoropals-dev-599d4-deployment",
-      "UnauthRoleName": "amplify-pomodoropals-dev-599d4-unauthRole",
-      "StackName": "amplify-pomodoropals-dev-599d4",
-      "StackId": "arn:aws:cloudformation:us-west-1:851725559942:stack/amplify-pomodoropals-dev-599d4/771c0970-efd6-11ee-8429-02f404666881",
-      "AmplifyAppId": "d3er0t7qkmmu74"
+      "AuthRoleName": "amplify-pomodoropals-dev-181733-authRole",
+      "UnauthRoleArn": "arn:aws:iam::590183983617:role/amplify-pomodoropals-dev-181733-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::590183983617:role/amplify-pomodoropals-dev-181733-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-pomodoropals-dev-181733-deployment",
+      "UnauthRoleName": "amplify-pomodoropals-dev-181733-unauthRole",
+      "StackName": "amplify-pomodoropals-dev-181733",
+      "StackId": "arn:aws:cloudformation:us-east-1:590183983617:stack/amplify-pomodoropals-dev-181733/7a88cc00-e0d7-11ee-a40e-0ec312a8477d",
+      "AmplifyAppId": "d2eexwpkgxh09v"
+    },
+    "categories": {
+      "auth": {
+        "pomodoropalsc510e293": {},
+        "userPoolGroups": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d2eexwpkgxh09v",
+          "type": "cicd"
+        }
+      },
+      "storage": {
+        "s3pomodoropalsstorage02e7d6f8": {}
+      }
     }
   }
 }
