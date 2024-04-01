@@ -6,17 +6,28 @@ import AnalyticsToggle from '../components/AnalyticsToggle';
 import { StyleContext } from '../contexts/StyleContext';
 import Link from 'next/link';
 
+
 const Analytics = () => {
 	const { pomodoroCount } = useContext(TimerContext);
 	const [data, setData] = useState<{ label: string; count: number; }[]>([]);
 	const [chartType, setChartType] = useState<'week' | 'month' | 'year'>('week');
 	const { color } = useContext(StyleContext);
 
-	const activeColor: string =
-		color === 'red' ? '#F87070' : color === 'cyan' ? '#00D1D1' : '#D881F8';
+	const getHexColor = (color : string) => {
+		switch (color) {
+			case 'red': return '#F87070';
+			case 'cyan': return '#00D1D1';
+			case 'violet': return '#D881F8';
+			case 'green': return '#16A34A';
+			case 'pink': return '#F472B6';
+			default: return '';
+		}
+	};
+	const activeColor : string = getHexColor(color);
 
-	const activeColorBG: string =
-		color === 'red' ? 'bg-red' : color === 'cyan' ? 'bg-cyan' : 'bg-violet';
+	// const activeColorBG: string =
+	// 	color === 'red' ? 'bg-red' : color === 'cyan' ? 'bg-cyan' : 'bg-violet';
+	const activeColorBG: string = 'bg-' + color;
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -42,10 +53,6 @@ const Analytics = () => {
 	useEffect(() => {
 		drawChart();
 	},);
-
-	// useEffect(() => {
-	// 	drawChart();
-	// }, [data]);
 
 	const drawChart = () => {
 		const ctx = document.getElementById('pomodoroChart') as HTMLCanvasElement | null;

@@ -9,8 +9,7 @@ interface RecordListProps {
 const RecordList = ({ goals, onMarkAsComplete }: RecordListProps) => {
 	const { color } = useContext(StyleContext);
 
-	const activeColor: string =
-		color === 'red' ? 'bg-red' : color === 'cyan' ? 'bg-cyan' : 'bg-violet';
+	const activeColor: string = 'bg-' + color;
 
 	return (
 		<ul className='flex flex-col gap-6'>

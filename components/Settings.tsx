@@ -22,8 +22,7 @@ export default function Settings() {
   const { font } = useContext(StyleContext);
   const { color } = useContext(StyleContext);
 
-	const activeColor: string =
-		color === 'red' ? 'bg-red' : color === 'cyan' ? 'bg-cyan' : 'bg-violet';
+  const activeColor: string = 'bg-' + color;
 
   const {
     volume,

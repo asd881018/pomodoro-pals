@@ -21,9 +21,7 @@ export default function TimerToggler() {
   } = useContext(TimerContext);
   const { playToggleSfx } = useContext(SoundsContext);
 
-  const activeColor: string =
-    // eslint-disable-next-line no-nested-ternary
-    color === 'red' ? 'bg-red' : color === 'cyan' ? 'bg-cyan' : 'bg-violet';
+  const activeColor: string = 'bg-' + color;
 
   const timeOptions: TimeOptionTypes[] = [
     { id: 1, name: 'pomodoro', value: 'pomodoro' },

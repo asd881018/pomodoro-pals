@@ -11,8 +11,7 @@ const AnalyticsToggle = ({ onChartTypeChange }: AnalyticsToggleProps) => {
   const [timeOption, setTimeOption] = useState('week');
   const { color } = useContext(StyleContext);
 
-  const activeColor: string =
-    color === 'red' ? 'bg-red' : color === 'cyan' ? 'bg-cyan' : 'bg-violet';
+  const activeColor: string = 'bg-' + color;
 
   const timeOptions = [
     { id: 1, name: 'Week', value: 'week' },

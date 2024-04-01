@@ -21,8 +21,7 @@ export default function TimerDisplay({
 
   const { color } = useContext(StyleContext);
 
-  const activeColor: string =
-    color === 'red' ? 'text-red' : color === 'cyan' ? 'text-cyan' : 'text-violet';
+  const activeColor: string = 'text-' + color;
 
   const groupVariants: Variants = {
     initial: { opacity: 0, y: -10 },

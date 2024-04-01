@@ -24,8 +24,7 @@ const activityData: Activity[] = [
 const Summary = () => {
 	const { color } = useContext(StyleContext);
 
-	const activeColor: string =
-		color === 'red' ? 'text-red' : color === 'cyan' ? 'text-cyan' : 'text-violet';
+	const activeColor: string = 'text-' + color;
 
 	return (
 		<Layout page={'summary'}>

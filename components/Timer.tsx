@@ -21,9 +21,18 @@ export default function Timer() {
     useContext(TimerContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const activeColor: string =
-    // eslint-disable-next-line no-nested-ternary
-    color === 'red' ? 'F87070' : color === 'cyan' ? '00D1D1' : 'D881F8';
+  const getHexColor = (color : string) => {
+		switch (color) {
+			case 'red': return 'F87070';
+			case 'cyan': return '00D1D1';
+			case 'violet': return 'D881F8';
+			case 'green': return '16A34A';
+			case 'pink': return 'F472B6';
+			default: return '';
+		}
+	};
+	const activeColor : string = getHexColor(color);
+
 
   const convertedDuration = convertMinutesToSeconds(+timerDuration[timeOption]);
 

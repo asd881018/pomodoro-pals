@@ -9,9 +9,9 @@ const RecordForm = ({ onAddGoal }: RecordFormProps) => {
 	const [text, setText] = useState('');
 	const { color } = useContext(StyleContext);
 
-	const activeColor: string =
-		color === 'red' ? 'bg-red' : color === 'cyan' ? 'bg-cyan' : 'bg-violet';
-
+	// const activeColor: string =
+	// 	color === 'red' ? 'bg-red' : color === 'cyan' ? 'bg-cyan' : 'bg-violet';
+	const activeColor: string = 'bg-' + color;
 
 	const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setText(e.target.value);

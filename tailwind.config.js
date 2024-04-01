@@ -17,7 +17,7 @@ module.exports = {
         cyan: '#00D1D1',
         violet: '#D881F8',
         green: '#16A34A',
-        yellow: '#FDE047',
+        pink: '#F472B6',
       },
       backgroundImage: {
         'primary-gradient': 'linear-gradient(315deg, #2E325A 0%, #0E112A 100%)',

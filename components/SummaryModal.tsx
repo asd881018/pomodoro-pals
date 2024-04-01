@@ -16,8 +16,7 @@ interface ModalProps {
 function Modal({ onClose }: ModalProps) {
 	const { color } = useContext(StyleContext);
 
-	const activeColor: string =
-		color === 'red' ? 'bg-red' : color === 'cyan' ? 'bg-cyan' : 'bg-violet';
+	const activeColor: string = 'bg-' + color;
 
 	return (
 		<div className="fixed inset-0 bg-primary-dark bg-opacity-70 overflow-y-auto h-full w-full flex items-center justify-center">
