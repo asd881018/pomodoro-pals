@@ -1,4 +1,0 @@
-type UserCycle @model @auth(rules: [{allow: public}]) {
-  id: ID!
-  cycles: String
-} 
