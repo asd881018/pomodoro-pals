@@ -33,7 +33,9 @@ const Header = () => {
         </div>
         <div className="flex space-x-4 md:space-x-8">
           <Profile />
-          <Button className='text-white opacity-100 hover:text-gray-300 transition-colors duration-300' onClick={signOut} variation="primary">Sign Out</Button>
+          <Link href="/" onClick={signOut}>
+            <a className="text-white opacity-100 hover:text-gray-300 transition-colors duration-300">Sign Out</a>
+          </Link>
         </div>
       </div>
     </div>
