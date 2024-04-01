@@ -66,7 +66,7 @@ function Modal({ onClose }: ModalProps) {
 					<div className='h-0.5 w-full bg-secondary-dark' />
 
 					<motion.div variants={childrenVariants} className='p-6'>
-						<textarea className="w-full h-40 relative appearance-none rounded-lg bg-secondary-dark p-2 focus:outline-dashed focus:outline-primary-dark" placeholder="Data Here :)" />
+						<textarea className="w-full h-40 min-h-24 max-h-[75vh] relative appearance-none rounded-lg bg-secondary-dark p-2 focus:outline-dashed focus:outline-primary-dark" placeholder="Data Here :)" />
 					</motion.div>
 
 					<div className="absolute -bottom-6 left-1/2 -translate-x-1/2 space-x-4 flex justify-center mt-4">
