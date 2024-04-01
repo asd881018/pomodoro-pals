@@ -116,9 +116,6 @@ export function TimerProvider({ children }: { children: JSX.Element }) {
 
         fetchUsername();
 
-
-
-
         return newCount;
       });
     }

@@ -16,10 +16,13 @@ export default function FontsList() {
   const { color, setColor } = useContext(StyleContext);
   const { playBiteSfx } = useContext(SoundsContext);
 
+  // bgVal and textVal essentially to initialize colors otherwise it is transparent for newer added ones
   const colorOptions: StyleItemTypes[] = [
-    { id: 1, value: 'red' },
-    { id: 2, value: 'cyan' },
-    { id: 3, value: 'violet' },
+    { id: 1, value: 'red', bgVal: 'bg-red', textVal: 'text-red' },
+    { id: 2, value: 'cyan', bgVal: 'bg-cyan', textVal: 'text-cyan' },
+    { id: 3, value: 'violet', bgVal: 'bg-violet', textVal: 'text-violet' },
+    { id: 4, value: 'green', bgVal: 'bg-green', textVal: 'text-green' },
+    { id: 5, value: 'pink', bgVal: 'bg-pink', textVal: 'text-pink' },
   ];
 
   return (
@@ -31,7 +34,7 @@ export default function FontsList() {
         onChange={setColor}
         className='flex items-center justify-end gap-4'
       >
-        {colorOptions.map(({ id, value }) => (
+        {colorOptions.map(({ id, value, bgVal }) => (
           <RadioGroup.Option
             value={value}
             key={id}
@@ -41,7 +44,7 @@ export default function FontsList() {
               <button
                 type='button'
                 onClick={() => playBiteSfx()}
-                className={`flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 hover:ring-1 hover:ring-tertiary hover:ring-offset-4 focus:rounded-full focus:outline-dashed focus:outline-primary-dark bg-${value}`}
+                className={`flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 hover:ring-1 hover:ring-tertiary hover:ring-offset-4 focus:rounded-full focus:outline-dashed focus:outline-primary-dark ${bgVal}`}
               >
                 {checked && (
                   <Image src={checkmark} alt='checkmark' className='h-6 w-6' />

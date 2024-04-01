@@ -14,14 +14,17 @@ module.exports = {
         'secondary-dark': '#EFF1FA',
         tertiary: '#D7E0FF',
         red: '#F87070',
-        cyan: '#70F3F8',
+        cyan: '#00D1D1',
         violet: '#D881F8',
+        green: '#16A34A',
+        pink: '#F472B6',
       },
       backgroundImage: {
         'primary-gradient': 'linear-gradient(315deg, #2E325A 0%, #0E112A 100%)',
       },
       boxShadow: {
         'primary-shadow': '-50px -50px 100px #272C5A, 50px 50px 100px #121530',
+        'bg-dark-shadow': 'inset 0 0 0.5px 1px hsla(0,0%,100%,.02),0 0 0 1px hsla(0,0%,100%,.02),0 0.3px 1.4px hsla(0,0%,100%,.4),0 0.9px 1.5px hsla(0,0%,100%,0.3),0 1.5px 6px hsla(0,0%,100%,0.1)',
       },
       fontFamily: {
         'kumbh-sans': ['Kumbh Sans', 'sans-serif'],
