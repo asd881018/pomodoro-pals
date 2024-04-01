@@ -43,12 +43,6 @@ export function TimerProvider({ children }: { children: JSX.Element }) {
     handleStopClick();
   };
 
-  // const updatePomodoroCount = () => {
-  //   if (timeOption === 'pomodoro') {
-  //     setPomodoroCount(prevCount => prevCount + 1);
-  //   }
-  // };
-
   async function getCurrentUsername() {
     try{
       const {username} = await getCurrentUser();
@@ -97,7 +91,19 @@ export function TimerProvider({ children }: { children: JSX.Element }) {
             console.log(postData)
 
           // Making a POST request using fetch
-          fetch(CLOUDFRONT_URL, {
+          // fetch(CLOUDFRONT_URL, {
+          //   method: 'POST',
+          //   headers: {
+          //     'Content-Type': 'application/json',
+          //   },
+          //   body: JSON.stringify(postData),
+          // })
+          // .then(response => response.json())
+          // .then(data => console.log('Success:', data))
+          // .catch((error) => console.error('Error:', error));
+
+          // Making a POST request using fetch
+          fetch('https://zzytuicsrb.execute-api.us-west-1.amazonaws.com/dev/numOfCycles', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
