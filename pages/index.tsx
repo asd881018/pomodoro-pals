@@ -8,9 +8,9 @@ import { StyleContext } from "../contexts/StyleContext";
 import { TimerContext } from "../contexts/TimerContext";
 
 // Components
-import TimerToggler from "../components/TimerToggler";
-import Timer from "../components/Timer";
-import Settings from "../components/Settings";
+import TimerToggler from '../components/TimerToggler';
+import Timer from '../components/Timer';
+import Settings from '../components/Settings';
 
 // Assets
 import img from '../public/assets/static_image.png';
