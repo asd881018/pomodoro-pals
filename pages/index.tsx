@@ -16,10 +16,19 @@ import Settings from '../components/Settings';
 import img from '../public/assets/static_image.png';
 import Layout from '../components/Layout';
 
+import { Amplify } from "aws-amplify";
+import { Button, useAuthenticator, withAuthenticator } from '@aws-amplify/ui-react'
+import awsconfig from "../src/aws-exports";
+import config from "../src/aws-exports";
+import Link from "next/link";
+import Profile from "./profile";
+Amplify.configure({ ...awsconfig });
+
 export default function Home() {
   const { font } = useContext(StyleContext);
   const { pomodoroCount } = useContext(TimerContext);
-  
+  const { user, signOut } = useAuthenticator((context) => [context.user])
+
   const imageVariants: Variants = {
     initial: { opacity: 0, y: -10 },
     animate: {
@@ -56,6 +65,9 @@ export default function Home() {
             <Timer />
             <div className="text-white text-xl flex items-center justify-center">History: {pomodoroCount}</div>
             <Settings />
+            
+            <Profile/>
+            <Button onClick={signOut} variation="primary">Sign Out</Button>
           </div>
         </main>
         
