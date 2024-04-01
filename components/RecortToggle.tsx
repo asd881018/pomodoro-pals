@@ -15,15 +15,15 @@ interface RecordToggleProps {
 
 
 export default function RecordToggler({ goals, completedGoals, markAsComplete } : RecordToggleProps) {
-  const [recordOption, setRecordOption] = useState('completed');
+  const [recordOption, setRecordOption] = useState('current');
   const { color } = useContext(StyleContext);
   const { playToggleSfx } = useContext(SoundsContext);
 
   const activeColor: string = 'bg-' + color;
 
   const recordOptions = [
-    { id: 1, name: 'Completed Goals', value: 'completed' },
-    { id: 2, name: 'Current Goals', value: 'current' },
+    { id: 1, name: 'Current Goals', value: 'current' },
+    { id: 2, name: 'Completed Goals', value: 'completed' },
   ];
 
   const groupVariants: Variants = {
