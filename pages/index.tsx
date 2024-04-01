@@ -11,7 +11,6 @@ import { TimerContext } from '../contexts/TimerContext';
 import TimerToggler from '../components/TimerToggler';
 import Timer from '../components/Timer';
 import Settings from '../components/Settings';
-import Footer from '../components/Footer';
 
 // Assets
 import img from '../public/assets/static_image.png';
