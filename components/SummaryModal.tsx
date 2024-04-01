@@ -6,6 +6,8 @@ import { StyleContext } from "../contexts/StyleContext";
 import Image from 'next/image';
 import { motion, Variants } from 'framer-motion';
 
+import closeIcon from '../public/assets/icon-close.svg';
+
 interface ModalProps {
 	onClose: () => void
 }
@@ -58,22 +60,23 @@ function Modal({ onClose }: ModalProps) {
 							onClick={onClose}
 							className='focus:p-1 focus:outline-dashed focus:outline-primary-dark'
 						>
-							<Image src='close-button' alt='close' />
+							<Image src={closeIcon} alt='close' />
 						</button>
 					</motion.div>
 					<div className='h-0.5 w-full bg-secondary-dark' />
 
 					<motion.div variants={childrenVariants} className='p-6'>
 						<textarea className="w-full h-40 relative appearance-none rounded-lg bg-secondary-dark p-2 focus:outline-dashed focus:outline-primary-dark" placeholder="Data Here :)" />
-						<div className="absolute -bottom-6 left-1/2 -translate-x-1/2 space-x-4 flex justify-center mt-4">
-							<button
-								onClick={onClose}
-								className={`rounded-full ${activeColor} p-4 px-12 text-secondary transition-all duration-300 hover:scale-90 focus:rounded-full focus:outline-dashed focus:outline-primary`}
-							>
-								Save
-							</button>
-						</div>
 					</motion.div>
+
+					<div className="absolute -bottom-6 left-1/2 -translate-x-1/2 space-x-4 flex justify-center mt-4">
+						<button
+							onClick={onClose}
+							className={`rounded-full ${activeColor} p-4 px-12 text-secondary transition-all duration-300 hover:scale-90 focus:rounded-full focus:outline-dashed focus:outline-primary`}
+						>
+							Save
+						</button>
+					</div>
 				</div>
 			</motion.div>
 		</div>
