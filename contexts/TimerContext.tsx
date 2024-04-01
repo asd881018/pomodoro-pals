@@ -1,7 +1,8 @@
-import { useState, createContext, useMemo } from 'react';
+import { useState, createContext, useMemo } from "react";
+import { getCurrentUser } from "@aws-amplify/auth";
 
 // Types
-import { TimerDuration, TimerContextTypes } from '../types/index';
+import { TimerDuration, TimerContextTypes } from "../types/index";
 
 export const TimerContext = createContext<TimerContextTypes>({
   timerDuration: {
@@ -10,7 +11,7 @@ export const TimerContext = createContext<TimerContextTypes>({
     longBreak: 15,
   },
   setTimerDuration: () => null,
-  timeOption: 'pomodoro',
+  timeOption: "pomodoro",
   setTimeOption: () => null,
   isPlaying: false,
   resetKey: 0,
@@ -24,7 +25,7 @@ export const TimerContext = createContext<TimerContextTypes>({
 });
 
 export function TimerProvider({ children }: { children: JSX.Element }) {
-  const [timeOption, setTimeOption] = useState('pomodoro');
+  const [timeOption, setTimeOption] = useState("pomodoro");
   const [timerDuration, setTimerDuration] = useState<TimerDuration>({
     pomodoro: 25,
     shortBreak: 5,
@@ -48,28 +49,68 @@ export function TimerProvider({ children }: { children: JSX.Element }) {
   //   }
   // };
 
+  async function getCurrentUsername() {
+    try {
+      const { username } = await getCurrentUser();
+      // console.log(`the username GET CURRENT USERNAME: ${username}`)
+      return username;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   const updatePomodoroCount = () => {
-    if (timeOption === 'pomodoro') {
-      setPomodoroCount(prevCount => {
+    if (timeOption === "pomodoro") {
+      setPomodoroCount((prevCount) => {
         const newCount = prevCount + 1;
 
-        // Data to be sent to the API
-        const postData = {
-          userId: "FrontEndExampleUserId",
-          pomodoroCount: newCount
+        //   //get the current userID from Amplify Auth
+        //   var usernameID;
+        //   getCurrentUsername()
+        //   .then(username => {
+        //     usernameID = username;
+        //     console.log("THE USER THAT IS REQUESTING IS ", username)
+
+        //   } );
+
+        //   // Data to be sent to the API
+        //   const postData = {
+        //     userID: usernameID,
+        //     cycle: newCount
+        //   };
+        //   console.log(postData)
+
+        const fetchUsername = async () => {
+          try {
+            const username = await getCurrentUsername();
+            console.log("THE USER THAT IS REQUESTING IS ", username);
+
+            const postData = {
+              userID: username,
+              cycle: newCount,
+            };
+            console.log(postData);
+
+            // Making a POST request using fetch
+            fetch(
+              "https://pa54p2pdh7.execute-api.us-east-1.amazonaws.com/dev",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(postData),
+              }
+            )
+              .then((response) => response.json())
+              .then((data) => console.log("Success:", data))
+              .catch((error) => console.error("Error:", error));
+          } catch (error) {
+            console.error("Error getting userame: ", error);
+          }
         };
 
-        // Making a POST request using fetch
-        fetch('https://zzytuicsrb.execute-api.us-west-1.amazonaws.com/dev/updatePomodoroCount', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(postData),
-        })
-        .then(response => response.json())
-        .then(data => console.log('Success:', data))
-        .catch((error) => console.error('Error:', error));
+        fetchUsername();
 
         return newCount;
       });
@@ -99,4 +140,3 @@ export function TimerProvider({ children }: { children: JSX.Element }) {
     <TimerContext.Provider value={value}>{children}</TimerContext.Provider>
   );
 }
-
