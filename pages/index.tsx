@@ -1,11 +1,11 @@
-import { useContext } from 'react';
-import { motion, Variants } from 'framer-motion';
-import Head from 'next/head';
-import Image from 'next/image';
+import { useContext } from "react";
+import { motion, Variants } from "framer-motion";
+import Head from "next/head";
+import Image from "next/image";
 
 // Context
-import { StyleContext } from '../contexts/StyleContext';
-import { TimerContext } from '../contexts/TimerContext';
+import { StyleContext } from "../contexts/StyleContext";
+import { TimerContext } from "../contexts/TimerContext";
 
 // Components
 import TimerToggler from '../components/TimerToggler';
@@ -16,9 +16,18 @@ import Settings from '../components/Settings';
 import img from '../public/assets/static_image.png';
 import Layout from '../components/Layout';
 
+import { Amplify } from "aws-amplify";
+import { Button, useAuthenticator, withAuthenticator } from '@aws-amplify/ui-react'
+import awsconfig from "../src/aws-exports";
+import config from "../src/aws-exports";
+import Link from "next/link";
+import Profile from "./profile";
+Amplify.configure({ ...awsconfig });
+
 export default function Home() {
   const { font } = useContext(StyleContext);
   const { pomodoroCount } = useContext(TimerContext);
+  const { user, signOut } = useAuthenticator((context) => [context.user])
 
   const imageVariants: Variants = {
     initial: { opacity: 0, y: -10 },
@@ -26,21 +35,23 @@ export default function Home() {
       opacity: 1,
       y: 0,
       transition: {
-        ease: 'easeOut',
+        ease: "easeOut",
         duration: 0.3,
       },
     },
   };
 
   return (
-    <div className={`grid min-h-screen w-full grid-rows-[1fr_auto] justify-center bg-primary ${font}`}>
+    <div
+      className={`grid min-h-screen w-full grid-rows-[1fr_auto] justify-center bg-primary ${font}`}
+    >
       <Head>
         <title>Pomodoro App</title>
         <meta
-          name='description'
-          content='Pomodoro App built with Next.JS, TypeScript, Tailwind CSS, and Framer Motion'
+          name="description"
+          content="Pomodoro App built with Next.JS, TypeScript, Tailwind CSS, and Framer Motion"
         />
-        <link rel='icon' href='/favicon.ico' />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout page={'index'}>
         <main className='w-[100vw] h-[100vh] pb-8 md:pb-0 flex flex-col items-center md:flex-row md:justify-between'>
@@ -54,8 +65,17 @@ export default function Home() {
             <Timer />
             <div className="text-white text-xl flex items-center justify-center">History: {pomodoroCount}</div>
             <Settings />
+            
+            <Profile/>
+            <Button onClick={signOut} variation="primary">Sign Out</Button>
           </div>
         </main>
+        
+        {/* <Link href="/profile">
+            <a className="flex items-center justify-center text-xl text-white">
+              Profile
+            </a>
+          </Link> */}
       </Layout>
     </div>
   );
