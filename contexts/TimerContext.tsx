@@ -97,7 +97,7 @@ export function TimerProvider({ children }: { children: JSX.Element }) {
             console.log(postData)
 
           // Making a POST request using fetch
-          fetch(CLOUDFRONT_URL, {
+          fetch('${CLOUDFRONT_URL}/numOfCycles', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

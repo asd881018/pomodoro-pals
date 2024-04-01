@@ -22,7 +22,7 @@ function Profile() {
         body: raw
       }
 
-      fetch(CLOUDFRONT_URL, requestOptions)
+      fetch('${CLOUDFRONT_URL}/numOfCycles', requestOptions)
       .then(response => response.text())
       .then(result => alert(JSON.parse(result).body))
       .catch(error => console.log("error", error))
