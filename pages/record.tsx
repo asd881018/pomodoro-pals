@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import RecordForm from "../components/RecordForm";
 import RecordList from "../components/RecordList";
 import RecordToggler from "../components/RecortToggle";
+import { v4 as uuidv4 } from 'uuid';
 
 const Record = () => {
   const [goals, setGoals] = useState<string[]>([]);
@@ -18,10 +19,14 @@ const Record = () => {
     // Get the current user
     const user = await getCurrentUser();
     const userID = user ? user.username : null;
-
-    // Data to be sent to the API
+	
+	// Generate a unique goalID
+    const goalID = uuidv4();
+    
+	// Data to be sent to the API
     const postData = {
       userID: userID,
+	  goalID: goalID,
       completed: false,
       goalName: text,
     };
