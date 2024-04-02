@@ -97,7 +97,7 @@ export function TimerProvider({ children }: { children: JSX.Element }) {
             console.log(postData)
 
           // Making a POST request using fetch
-          fetch('https://d1c0fz5pado86u.cloudfront.net/dev/numOfCycles', {
+          fetch(`${CLOUDFRONT_URL}/numOfCycles`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
