@@ -28,6 +28,7 @@ const Analytics = () => {
 	// const activeColorBG: string =
 	// 	color === 'red' ? 'bg-red' : color === 'cyan' ? 'bg-cyan' : 'bg-violet';
 	const activeColorBG: string = 'bg-' + color;
+	const activeColorText: string = 'text-' + color;
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -141,8 +142,8 @@ const Analytics = () => {
 				<div className='flex flex-col'>
 					<h1 className="text-white text-xl text-center pb-4">Latest Report Summary</h1>
 
-					<div className={`bg-black/[.3] shadow-bg-dark-shadow rounded-lg p-4`}>
-						<h2 className={`text-xl font-semibold text-[${activeColor}] mb-2`}>Session #</h2>
+					<div className={`bg-black/[.3] mx-4 md:mx-16 shadow-bg-dark-shadow rounded-lg p-4`}>
+						<h2 className={`text-xl font-semibold ${activeColorText} mb-2`}>Session #</h2>
 						<p className="text-gray-300 mb-4">
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit,
 							sed do eiusmod tempor incididunt ut labore et dolore magna
