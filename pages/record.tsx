@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import RecordForm from "../components/RecordForm";
 import RecordList from "../components/RecordList";
 import RecordToggler from "../components/RecortToggle";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 const Record = () => {
   const [goals, setGoals] = useState<string[]>([]);
@@ -19,14 +19,14 @@ const Record = () => {
     // Get the current user
     const user = await getCurrentUser();
     const userID = user ? user.username : null;
-	
-	// Generate a unique goalID
+
+    // Generate a unique goalID
     const goalID = uuidv4();
-    
-	// Data to be sent to the API
+
+    // Data to be sent to the API
     const postData = {
       userID: userID,
-	  goalID: goalID,
+      goalID: goalID,
       completed: false,
       goalName: text,
     };
@@ -55,14 +55,57 @@ const Record = () => {
     }
   };
 
-  const markAsComplete = (index: number) => {
-    const completedGoal = goals[index];
-    const updatedGoals = goals.filter((_, i) => i !== index);
-    setGoals(updatedGoals);
-    setCompletedGoals((prevCompletedGoals) => [
-      completedGoal,
-      ...prevCompletedGoals,
-    ]);
+  //   const markAsComplete = (index: number) => {
+  //     const completedGoal = goals[index];
+  //     const updatedGoals = goals.filter((_, i) => i !== index);
+  //     setGoals(updatedGoals);
+  //     setCompletedGoals((prevCompletedGoals) => [
+  //       completedGoal,
+  //       ...prevCompletedGoals,
+  //     ]);
+  //   };
+
+  const markAsComplete = async (index: number) => {
+    // Assuming each goalName is unique per user
+    const goalToComplete = goals[index];
+	const user = await getCurrentUser();
+    const userID = user ? user.username : null;
+
+    // Prepare the data for the API call to update the DynamoDB item
+    const updateData = {
+      userID: userID,
+      goalName: goalToComplete, // Use goalName to identify the record
+      completed: true,
+    };
+
+    try {
+      const response = await fetch(`${CLOUDFRONT_URL}/pomodoroRecord`, {
+        // Replace with your actual API endpoint
+        method: "PUT", // Assuming your API and Lambda function are set up for a PUT request
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updateData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to mark the goal as completed");
+      }
+
+      // Update the local state to reflect the changes after successful API call
+      const updatedGoals = goals.filter((_, i) => i !== index);
+      setGoals(updatedGoals);
+      setCompletedGoals((prevCompletedGoals) => [
+        goalToComplete,
+        ...prevCompletedGoals,
+      ]);
+
+      // Log or process the successful response
+      const responseData = await response.json();
+      console.log("Goal marked as complete:", responseData);
+    } catch (error) {
+      console.error("Error updating the goal:", error);
+    }
   };
 
   return (
