@@ -13,7 +13,7 @@ const Analytics = () => {
 	const [chartType, setChartType] = useState<'week' | 'month' | 'year'>('week');
 	const { color } = useContext(StyleContext);
 
-	const getHexColor = (color : string) => {
+	const getHexColor = (color: string) => {
 		switch (color) {
 			case 'red': return '#F87070';
 			case 'cyan': return '#00D1D1';
@@ -23,11 +23,12 @@ const Analytics = () => {
 			default: return '';
 		}
 	};
-	const activeColor : string = getHexColor(color);
+	const activeColor: string = getHexColor(color);
 
 	// const activeColorBG: string =
 	// 	color === 'red' ? 'bg-red' : color === 'cyan' ? 'bg-cyan' : 'bg-violet';
 	const activeColorBG: string = 'bg-' + color;
+	const activeColorText: string = 'text-' + color;
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -140,9 +141,10 @@ const Analytics = () => {
 
 				<div className='flex flex-col'>
 					<h1 className="text-white text-xl text-center pb-4">Latest Report Summary</h1>
-					<div className='w-full flex flex-col items-left justify-center md:px-2 md:w-11/12 m-auto'>
-						<h3 className="text-white text-md pb-2">Date of Report</h3>
-						<p className="text-white text-sm">Comments:
+
+					<div className={`bg-black/[.3] mx-4 md:mx-16 shadow-bg-dark-shadow rounded-lg p-4`}>
+						<h2 className={`text-xl font-semibold ${activeColorText} mb-2`}>Session #</h2>
+						<p className="text-gray-300 mb-4">
 							Lorem ipsum dolor sit amet, consectetur adipiscing elit,
 							sed do eiusmod tempor incididunt ut labore et dolore magna
 							aliqua. Ut enim ad minim veniam, quis nostrud exercitation
@@ -152,6 +154,7 @@ const Analytics = () => {
 							sint occaecat cupidatat non proident, sunt in culpa qui
 							officia deserunt mollit anim id est laborum.
 						</p>
+						<p className="text-sm text-gray-400">Date: YYYY-MM-DD</p>
 					</div>
 					<Link href="/summary" className='self-center'>
 						<button
