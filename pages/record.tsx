@@ -30,7 +30,7 @@ const Record = () => {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          userID: userID,
+          userID: userID || "", // Ensure userID is always a string
         },
       });
 
