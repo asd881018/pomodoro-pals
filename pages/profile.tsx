@@ -9,7 +9,6 @@ function Profile() {
   useEffect(()=> {
     console.log("The authuser does NOTTTT exist")
 
-
     if (authUser){
       console.log("The authuser does exist")
       var myHeaders = new Headers();
@@ -34,8 +33,8 @@ function Profile() {
       {({user }) => {
         setAuthUser(user?.username|| null)
         return(
-        <div>
-          <h2>HERE IS THE USERNAME AGAIN {authUser}</h2>
+        <div className='hidden'>
+          <h2>USERNAME : {authUser}</h2>
         </div>
         )
         }}
