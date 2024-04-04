@@ -40,6 +40,9 @@ const Record = () => {
       const completedGoals = data.filter((goal: Goal) => goal.completed);
       const uncompletedGoals = data.filter((goal: Goal) => !goal.completed);
 
+      console.log("completedGoals:", completedGoals);
+      console.log("uncompletedGoals:", uncompletedGoals);
+
       // Update state
       setGoals(uncompletedGoals);
       setCompletedGoals(completedGoals);
