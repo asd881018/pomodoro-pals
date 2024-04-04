@@ -1,10 +1,15 @@
 import Layout from "../components/Layout";
 import { getCurrentUser } from "@aws-amplify/auth";
 import { CLOUDFRONT_URL } from "../utils/config";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import RecordForm from "../components/RecordForm";
 import RecordList from "../components/RecordList";
 import RecordToggler from "../components/RecortToggle";
+
+interface Goal {
+	text: string;
+	completed: boolean;
+}
 
 const Record = () => {
   const [goals, setGoals] = useState<string[]>([]);
@@ -13,6 +18,40 @@ const Record = () => {
   // const addGoal = (text: string) => {
   // 	setGoals(prevGoals => [...prevGoals, text]);
   // };
+
+  const fetchGoals = async () => {
+    // Get the current user
+    const user = await getCurrentUser();
+    const userID = user ? user.username : null;
+
+    // Making a GET request using fetch
+    try {
+      const response = await fetch(`${CLOUDFRONT_URL}/pomodoroRecord`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          userID: userID,
+        },
+      });
+
+      const data = await response.json();
+
+      // Separate the goals into completed and uncompleted
+      const completedGoals = data.filter((goal: Goal) => goal.completed);
+      const uncompletedGoals = data.filter((goal: Goal) => !goal.completed);
+
+      // Update state
+      setGoals(uncompletedGoals);
+      setCompletedGoals(completedGoals);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  // Call fetchGoals in useEffect to run it when the component mounts
+  useEffect(() => {
+    fetchGoals();
+  }, []);
 
   const addGoal = async (text: string) => {
     // Get the current user
@@ -63,7 +102,7 @@ const Record = () => {
   const markAsComplete = async (index: number) => {
     // Assuming each goalName is unique per user
     const goalToComplete = goals[index];
-	const user = await getCurrentUser();
+    const user = await getCurrentUser();
     const userID = user ? user.username : null;
 
     // Prepare the data for the API call to update the DynamoDB item
