@@ -7,7 +7,8 @@ import RecordList from "../components/RecordList";
 import RecordToggler from "../components/RecortToggle";
 
 interface Goal {
-	text: string;
+	userID: string;
+  goalName: string;
 	completed: boolean;
 }
 
@@ -37,22 +38,8 @@ const Record = () => {
 
       const data = await response.json();
 
-      console.log("data:", data);
-
-      // Separate the goals into completed and uncompleted
-      // const completedGoals = data.filter((goal: Goal) => goal.completed);
-      // const uncompletedGoals = data.filter((goal: Goal) => !goal.completed);
-
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].completed) {
-          completedGoals.push(data[i]);
-        } else {
-          goals.push(data[i]);
-        }
-      }
-
-      console.log("completedGoals:", completedGoals);
-      console.log("uncompletedGoals:", goals);
+      const completedGoals = data.filter((data: Goal) => data.completed).map((data: Goal) => data.goalName);
+      const goals = data.filter((data: Goal) => !data.completed).map((data: Goal) => data.goalName);
 
       // Update state
       setGoals(goals);
