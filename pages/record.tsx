@@ -35,9 +35,17 @@ const Record = () => {
       });
 
       const data = await response.json();
+      // const completedGoals = data.filter((data: Goal) => data.completed).map((data: Goal) => data.goalName);
+      // const goals = data.filter((data: Goal) => !data.completed).map((data: Goal) => data.goalName);
 
-      const completedGoals = data.filter((data: Goal) => data.completed).map((data: Goal) => data.goalName);
-      const goals = data.filter((data: Goal) => !data.completed).map((data: Goal) => data.goalName);
+      for (let i = 0; i < data.length; i++) {
+        const goal = data[i];
+        if (goal.completed) {
+          completedGoals.push(goal.goalName);
+        } else {
+          goals.push(goal.goalName);
+        }
+      }
 
       console.log("response:", response);
       console.log("data:", data);
