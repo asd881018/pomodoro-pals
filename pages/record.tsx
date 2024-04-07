@@ -26,7 +26,7 @@ const Record = () => {
 
     // Making a GET request using fetch
     try {
-      const response = await fetch(`${CLOUDFRONT_URL}/pomodoroRecord?userID=${userID}`, {
+      const response = await fetch(`${CLOUDFRONT_URL}/pomodoroRecord?${userID}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
