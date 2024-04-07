@@ -38,15 +38,25 @@ const Record = () => {
 
       const data = await response.json();
 
+      console.log("data:", data);
+
       // Separate the goals into completed and uncompleted
-      const completedGoals = data.filter((goal: Goal) => goal.completed);
-      const uncompletedGoals = data.filter((goal: Goal) => !goal.completed);
+      // const completedGoals = data.filter((goal: Goal) => goal.completed);
+      // const uncompletedGoals = data.filter((goal: Goal) => !goal.completed);
+
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].completed) {
+          completedGoals.push(data[i]);
+        } else {
+          goals.push(data[i]);
+        }
+      }
 
       console.log("completedGoals:", completedGoals);
-      console.log("uncompletedGoals:", uncompletedGoals);
+      console.log("uncompletedGoals:", goals);
 
       // Update state
-      setGoals(uncompletedGoals);
+      setGoals(goals);
       setCompletedGoals(completedGoals);
     } catch (error) {
       console.error("Error:", error);
