@@ -34,6 +34,8 @@ const Record = () => {
         },
       });
 
+      console.log("response:", response);
+
       const data = await response.json();
 
       // Separate the goals into completed and uncompleted
