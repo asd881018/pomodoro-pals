@@ -13,12 +13,9 @@ interface Goal {
 }
 
 const Record = () => {
-  // const [goals, setGoals] = useState<string[]>([]);
-  // const [completedGoals, setCompletedGoals] = useState<string[]>([]);
-
-  // const addGoal = (text: string) => {
-  // 	setGoals(prevGoals => [...prevGoals, text]);
-  // };
+  const [goals, setGoals] = useState<string[]>([]);
+  const [completedGoals, setCompletedGoals] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const fetchGoals = async () => {
     // Get the current user
@@ -36,27 +33,26 @@ const Record = () => {
 
       const data = await response.json();
       const records = data.records;
-      const [goals, setGoals] = useState<string[]>([]);
-      const [completedGoals, setCompletedGoals] = useState<string[]>([]);
-      // const completedGoals = data.filter((data: Goal) => data.completed).map((data: Goal) => data.goalName);
-      // const goals = data.filter((data: Goal) => !data.completed).map((data: Goal) => data.goalName);
+      // Temporary arrays to hold completed and uncompleted goals
+      const tempCompletedGoals = [];
+      const tempUncompletedGoals = [];
 
       for (const goal of records) {
         if (goal.completed) {
-          completedGoals.push(goal.goalName);
+          tempCompletedGoals.push(goal.goalName);
         } else {
-          goals.push(goal.goalName);
+          tempUncompletedGoals.push(goal.goalName);
         }
       }
 
       console.log("response:", response);
       console.log("data:", data);
-      console.log("goals:", goals);
-      console.log("completedGoals:", completedGoals);
+      console.log("UncompletedGoals:", tempUncompletedGoals);
+      console.log("completedGoals:", tempCompletedGoals);
 
       // Update state
-      setGoals(goals);
-      setCompletedGoals(completedGoals);
+      setGoals(tempUncompletedGoals);
+      setCompletedGoals(tempCompletedGoals);
     } catch (error) {
       console.error("Error:", error);
     }
