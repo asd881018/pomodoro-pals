@@ -35,11 +35,11 @@ const Record = () => {
       });
 
       const data = await response.json();
+      const records = data.records;
       // const completedGoals = data.filter((data: Goal) => data.completed).map((data: Goal) => data.goalName);
       // const goals = data.filter((data: Goal) => !data.completed).map((data: Goal) => data.goalName);
 
-      for (let i = 0; i < data.length; i++) {
-        const goal = data[i];
+      for (const goal of records) {
         if (goal.completed) {
           completedGoals.push(goal.goalName);
         } else {
