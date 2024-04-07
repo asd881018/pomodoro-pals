@@ -41,6 +41,9 @@ const Record = () => {
       const completedGoals = data.filter((data: Goal) => data.completed).map((data: Goal) => data.goalName);
       const goals = data.filter((data: Goal) => !data.completed).map((data: Goal) => data.goalName);
 
+      console.log("goals:", goals);
+      console.log("completedGoals:", completedGoals);
+
       // Update state
       setGoals(goals);
       setCompletedGoals(completedGoals);
