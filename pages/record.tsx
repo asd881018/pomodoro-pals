@@ -26,12 +26,12 @@ const Record = () => {
 
     // Making a GET request using fetch
     try {
-      const response = await fetch(`${CLOUDFRONT_URL}/pomodoroRecord?userID=${encodeURIComponent(userID || "")}`, {
+      const response = await fetch(`${CLOUDFRONT_URL}/pomodoroRecord`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          // userID: userID || "", // Ensure userID is always a string
         },
+        body: JSON.stringify({ userID: userID }),
       });
 
       console.log("response:", response);
