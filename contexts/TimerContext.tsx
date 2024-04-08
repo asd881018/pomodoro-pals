@@ -26,6 +26,7 @@ async function getCurrentCycle(){
 }
 
 let curPomodoroCount = getCurrentCycle();
+console.log("curPomodoroCount: ", curPomodoroCount);
 
 export const TimerContext = createContext<TimerContextTypes>({
   timerDuration: {
@@ -44,7 +45,7 @@ export const TimerContext = createContext<TimerContextTypes>({
   handleResetClick: () => null,
   handleOnComplete: () => null,
   updatePomodoroCount: () => null,
-  pomodoroCount: null,
+  pomodoroCount: 0,
 });
 
 export function TimerProvider({ children }: { children: JSX.Element }) {
@@ -56,7 +57,7 @@ export function TimerProvider({ children }: { children: JSX.Element }) {
   });
   const [isPlaying, setIsPlaying] = useState(false);
   const [resetKey, setResetKey] = useState(0);
-  const [pomodoroCount, setPomodoroCount] = useState<number | null>(null);
+  const [pomodoroCount, setPomodoroCount] = useState(0);
   useEffect(() => {
     async function initializePomodoroCount() {
       try {
@@ -119,15 +120,9 @@ export function TimerProvider({ children }: { children: JSX.Element }) {
 
   const updatePomodoroCount = () => {
     if (timeOption === 'pomodoro') {
-      let newCount=0;
 
       setPomodoroCount( pomodoroCount => {
-        if (pomodoroCount ===null){
-          newCount = 1;
-        }
-        else{
-          newCount = pomodoroCount! + 1;
-        }
+        const newCount = pomodoroCount + 1;
 
       //   prevCount => {
       // //   // console.log("THE PREVIOUSSSS COUNT IS ", prevCount)
