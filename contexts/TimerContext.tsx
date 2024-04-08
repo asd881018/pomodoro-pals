@@ -60,6 +60,25 @@ export function TimerProvider({ children }: { children: JSX.Element }) {
     }
   } 
 
+  async function getCurrentCycle(username: string){
+    try{
+      console.log("getcurrentcycle username"+ username);
+      fetch(`${CLOUDFRONT_URL}/numOfCycles?userID=${username}`, {
+        method: 'GET', 
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then(response => response.json())
+      .then(data => console.log("FROM NEW GETCURRENTCYCLE CALL", data))
+      .catch(error => console.error('Error:', error));
+    }
+    catch(err){
+      console.log(err);
+    }
+  }
+
+
   const updatePomodoroCount = () => {
     if (timeOption === 'pomodoro') {
 
@@ -114,7 +133,8 @@ export function TimerProvider({ children }: { children: JSX.Element }) {
           }
         }
 
-        fetchUsername();
+        // fetchUsername();
+        getCurrentCycle("2d8450bc-0776-44fe-aa9b-e56517be6cd1");
 
         return newCount;
       });
