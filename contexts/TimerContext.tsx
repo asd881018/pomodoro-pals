@@ -134,7 +134,7 @@ export function TimerProvider({ children }: { children: JSX.Element }) {
           }
         }
 
-        // fetchUsername();
+        fetchUsername();
         getCurrentCycle();
 
         return newCount;
