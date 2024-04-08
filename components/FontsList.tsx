@@ -12,7 +12,7 @@ import { StyleItemTypes } from '../types/index';
 export default function FontsList() {
   const { font, setFont } = useContext(StyleContext);
   const { playBiteSfx } = useContext(SoundsContext);
-  let { pomodoroCount } = useContext(TimerContext);
+  const { pomodoroCount } = useContext(TimerContext);
 
   // const fontOptions: StyleItemTypes[] = [
   //   { id: 1, value: 'font-sans' },
@@ -27,16 +27,12 @@ export default function FontsList() {
     { id: 2, value: 'font-roboto-slab' },
     { id: 3, value: 'font-space-mono' },
   ];
-  if (pomodoroCount === null){
-    pomodoroCount = 0;
-  }
 
-
-  if (pomodoroCount! > 2) {
+  if (pomodoroCount > 2) {
     fontOptions.push({ id: 4, value: 'font-kumbh-sans' });
   }
 
-  if (pomodoroCount! > 5) {
+  if (pomodoroCount > 5) {
     fontOptions.push({ id: 5, value: 'font-serif' });
   }
 
