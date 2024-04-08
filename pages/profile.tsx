@@ -7,10 +7,11 @@ import '@aws-amplify/ui-react/styles.css';
 function Profile() {
   const [authUser, setAuthUser] = useState<string | null>(null);
   useEffect(()=> {
-    console.log("The authuser does NOTTTT exist")
+    // console.log("The authuser does NOTTTT exist")
 
-    if (authUser){
-      console.log("The authuser does exist")
+    if (!authUser){
+      // console.log("The authuser does exist")
+      console.log("The authuser does NOTTTT exist, create a mew user in DB")
       var myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
       var raw = JSON.stringify({"userID": authUser, "cycle": 0})
