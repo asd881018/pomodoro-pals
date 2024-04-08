@@ -8,6 +8,7 @@ function Profile() {
   const [authUser, setAuthUser] = useState<string | null>(null);
   useEffect(()=> {
     // console.log("The authuser does NOTTTT exist")
+    console.log("authUser: ", authUser)
 
     if (!authUser){
       // console.log("The authuser does exist")
