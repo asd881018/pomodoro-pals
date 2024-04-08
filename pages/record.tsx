@@ -45,10 +45,10 @@ const Record = () => {
         }
       }
 
-      console.log("response:", response);
-      console.log("data:", data);
-      console.log("UncompletedGoals:", tempUncompletedGoals);
-      console.log("completedGoals:", tempCompletedGoals);
+      // console.log("response:", response);
+      // console.log("data:", data);
+      // console.log("UncompletedGoals:", tempUncompletedGoals);
+      // console.log("completedGoals:", tempCompletedGoals);
 
       // Update state
       setGoals(tempUncompletedGoals);

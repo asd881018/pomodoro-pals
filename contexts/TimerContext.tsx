@@ -1,8 +1,32 @@
-import { useState, createContext, useMemo } from 'react';
+import { useState, createContext, useMemo, useEffect } from 'react';
 import {getCurrentUser} from '@aws-amplify/auth'
 import { CLOUDFRONT_URL } from '../utils/config';
 // Types
 import { TimerDuration, TimerContextTypes } from '../types/index';
+
+async function getCurrentCycle(){
+  try{
+    const {username} = await getCurrentUser();
+    console.log("getcurrentcycle username"+ username);
+    fetch(`${CLOUDFRONT_URL}/numOfCycles?userID=${username}`, {
+      method: 'GET', 
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then(response => response.json())
+    .then(data => {console.log("FROM NEW GETCURRENTCYCLE CALL", data); return data.cycles})
+    .catch(error => console.error('Error:', error));
+    
+  }
+  catch(err){
+    console.log(err);
+    return 0;
+  }
+}
+
+let curPomodoroCount = getCurrentCycle();
+console.log("curPomodoroCount: ", curPomodoroCount);
 
 export const TimerContext = createContext<TimerContextTypes>({
   timerDuration: {
@@ -34,6 +58,20 @@ export function TimerProvider({ children }: { children: JSX.Element }) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [resetKey, setResetKey] = useState(0);
   const [pomodoroCount, setPomodoroCount] = useState(0);
+  useEffect(() => {
+    async function initializePomodoroCount() {
+      try {
+        const num = await getCurrentCycle();
+        if (typeof num === 'number') { // Check if num is a number
+          setPomodoroCount(num); // Update pomodoroCount state
+        }
+      } catch (error) {
+        console.error('Error initializing pomodoroCount:', error);
+      }
+    }
+    initializePomodoroCount();
+  }, []);
+
 
   const handleStopClick = () => setIsPlaying(false);
   const handlePauseClick = () => setIsPlaying((prevState: any) => !prevState);
@@ -60,33 +98,36 @@ export function TimerProvider({ children }: { children: JSX.Element }) {
     }
   } 
 
-  async function getCurrentCycle(){
-    try{
-      const {username} = await getCurrentUser();
-      console.log("getcurrentcycle username"+ username);
-      fetch(`${CLOUDFRONT_URL}/numOfCycles?userID=${username}`, {
-        method: 'GET', 
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      })
-      .then(response => response.json())
-      .then(data => console.log("FROM NEW GETCURRENTCYCLE CALL", data))
-      .catch(error => console.error('Error:', error));
-    }
-    catch(err){
-      console.log(err);
-    }
-  }
+  // async function getCurrentCycle(){
+  //   try{
+  //     const {username} = await getCurrentUser();
+  //     console.log("getcurrentcycle username"+ username);
+  //     fetch(`${CLOUDFRONT_URL}/numOfCycles?userID=${username}`, {
+  //       method: 'GET', 
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //     })
+  //     .then(response => response.json())
+  //     .then(data => console.log("FROM NEW GETCURRENTCYCLE CALL", data))
+  //     .catch(error => console.error('Error:', error));
+  //   }
+  //   catch(err){
+  //     console.log(err);
+  //   }
+  // }
 
 
   const updatePomodoroCount = () => {
     if (timeOption === 'pomodoro') {
 
-      setPomodoroCount(prevCount => {
-      //   // console.log("THE PREVIOUSSSS COUNT IS ", prevCount)
+      setPomodoroCount( pomodoroCount => {
+        const newCount = pomodoroCount + 1;
 
-        const newCount = prevCount + 1;
+      //   prevCount => {
+      // //   // console.log("THE PREVIOUSSSS COUNT IS ", prevCount)
+
+      //   const newCount = prevCount + 1;
 
       //   //get the current userID from Amplify Auth
       //   var usernameID;
@@ -134,8 +175,9 @@ export function TimerProvider({ children }: { children: JSX.Element }) {
           }
         }
 
-        fetchUsername();
         getCurrentCycle();
+        fetchUsername();
+        
 
         return newCount;
       });
