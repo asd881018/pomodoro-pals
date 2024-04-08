@@ -6,29 +6,29 @@ import '@aws-amplify/ui-react/styles.css';
 
 function Profile() {
   const [authUser, setAuthUser] = useState<string | null>(null);
-  useEffect(()=> {
-    // console.log("The authuser does NOTTTT exist")
-    console.log("authUser: ", authUser)
+  // useEffect(()=> {
+  //   // console.log("The authuser does NOTTTT exist")
+  //   console.log("authUser: ", authUser)
 
-    if (!authUser){
-      // console.log("The authuser does exist")
-      console.log("The authuser does NOTTTT exist, create a mew user in DB")
-      var myHeaders = new Headers();
-      myHeaders.append("Content-Type", "application/json");
-      var raw = JSON.stringify({"userID": authUser, "cycle": 0})
+  //   if (!authUser){
+  //     // console.log("The authuser does exist")
+  //     console.log("The authuser does NOTTTT exist, create a mew user in DB")
+  //     var myHeaders = new Headers();
+  //     myHeaders.append("Content-Type", "application/json");
+  //     var raw = JSON.stringify({"userID": authUser, "cycle": 0})
 
-      var requestOptions = {
-        method: "POST",
-        headers: myHeaders,
-        body: raw
-      }
+  //     var requestOptions = {
+  //       method: "POST",
+  //       headers: myHeaders,
+  //       body: raw
+  //     }
 
-      fetch(`${CLOUDFRONT_URL}/numOfCycles`, requestOptions)
-      .then(response => response.text())
-      .then(result => alert(JSON.parse(result).body))
-      .catch(error => console.log("error", error))
-    }
-  }, [authUser])
+  //     fetch(`${CLOUDFRONT_URL}/numOfCycles`, requestOptions)
+  //     .then(response => response.text())
+  //     .then(result => alert(JSON.parse(result).body))
+  //     .catch(error => console.log("error", error))
+  //   }
+  // }, [authUser])
 
   return (
     <Authenticator>
