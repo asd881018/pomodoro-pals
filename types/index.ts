@@ -36,7 +36,7 @@ export interface TimerContextTypes {
   handleResetClick: () => void;
   handleOnComplete: () => void;
   updatePomodoroCount: () => void;
-  pomodoroCount: number;
+  pomodoroCount: number| null;
 }
 
 export interface SoundsContextTypes {
