@@ -60,8 +60,9 @@ export function TimerProvider({ children }: { children: JSX.Element }) {
     }
   } 
 
-  async function getCurrentCycle(username: string){
+  async function getCurrentCycle(){
     try{
+      const {username} = await getCurrentUser();
       console.log("getcurrentcycle username"+ username);
       fetch(`${CLOUDFRONT_URL}/numOfCycles?userID=${username}`, {
         method: 'GET', 
@@ -134,7 +135,7 @@ export function TimerProvider({ children }: { children: JSX.Element }) {
         }
 
         // fetchUsername();
-        getCurrentCycle("2d8450bc-0776-44fe-aa9b-e56517be6cd1");
+        getCurrentCycle();
 
         return newCount;
       });
