@@ -16,7 +16,7 @@ import { StyleItemTypes } from '../types/index';
 export default function FontsList() {
   const { color, setColor } = useContext(StyleContext);
   const { playBiteSfx } = useContext(SoundsContext);
-  const { pomodoroCount } = useContext(TimerContext);
+  let { pomodoroCount } = useContext(TimerContext);
   
   // const colorOptions: StyleItemTypes[] = [
   //   { id: 1, value: 'red', bgVal: 'bg-red', textVal: 'text-red' },
@@ -32,12 +32,15 @@ export default function FontsList() {
     { id: 2, value: 'cyan', bgVal: 'bg-cyan', textVal: 'text-cyan' },
     { id: 3, value: 'violet', bgVal: 'bg-violet', textVal: 'text-violet' },
   ];
+  if (pomodoroCount === null){
+    pomodoroCount = 0;
+  }
 
-  if (pomodoroCount > 2) {
+  if (pomodoroCount! > 2) {
     colorOptions.push({ id: 4, value: 'green', bgVal: 'bg-green', textVal: 'text-green' });
   }
 
-  if (pomodoroCount > 5) {
+  if (pomodoroCount! > 5) {
     colorOptions.push({ id: 5, value: 'pink', bgVal: 'bg-pink', textVal: 'text-pink' });
 
   }
